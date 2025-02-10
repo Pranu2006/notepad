@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoteSync</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div id="auth-container">
+            <div class="auth-box">
+                <div class="form-container">
+                    <div class="form-header">
+                        <h2>NoteSync</h2>
+                    </div>
+                    
+                    <!-- Login Form -->
+                    <form id="login-form">
+                        <input type="email" id="login-email" placeholder="Email" required>
+                        <input type="password" id="login-password" placeholder="Password" required>
+                        <button type="submit">Login</button>
+                        <p>Don't have an account? <span id="signup-link">Sign Up</span></p>
+                    </form>
+
+                    <!-- Signup Form -->
+                    <form id="signup-form" class="hidden">
+                        <input type="text" id="signup-name" placeholder="Full Name" required>
+                        <input type="email" id="signup-email" placeholder="Email" required>
+                        <input type="password" id="signup-password" placeholder="Password" required>
+                        <button type="submit">Create Account</button>
+                        <p>Already have an account? <span id="login-link">Login</span></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div id="notes-container" class="hidden">
+            <div class="notes-header">
+                <h1>My Notes</h1>
+                <button id="logout-btn">Logout</button>
+            </div>
+            <div class="notes-editor">
+                <textarea id="note-input" placeholder="Write your note here..."></textarea>
+                <div class="note-actions">
+                    <button id="save-note">Save Note</button>
+                    <button id="clear-note">Clear</button>
+                </div>
+            </div>
+            <div id="notes-list"></div>
+        </div>
+    </div>
+
+    <!-- Firebase Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    
+    <script src="script.js"></script>
+</body>
+</html>
