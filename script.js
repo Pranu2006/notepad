@@ -1,13 +1,14 @@
 // Firebase Configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-    apiKey: "AIzaSyBTGAPwqAAL9hAGMDcsBU_BSjw0ZFY0c_k",
-    authDomain: "note-book-57811.firebaseapp.com",
-    projectId: "note-book-57811",
-    storageBucket: "note-book-57811.firebaseapp.com",
-    messagingSenderId: "974143588920",
-    appId: "1:974143588920:web:19285c565b16b023f574cd",
-    measurementId: "G-1V6NS1HY5M"
-};
+    apiKey: "AIzaSyCzah5yqXyfFPOj9Ed4FWlffCf4_7wqnQI",
+    authDomain: "notes-a261e.firebaseapp.com",
+    projectId: "notes-a261e",
+    storageBucket: "notes-a261e.firebasestorage.app",
+    messagingSenderId: "574472680574",
+    appId: "1:574472680574:web:a9a6d1e7e90d643464d42f",
+    measurementId: "G-L004CN7LWS"
+  };
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
@@ -54,13 +55,13 @@ signupForm.addEventListener('submit', (e) => {
             });
         })
         .then(() => {
-            console('Account created successfully!');
+            console.log('Account created successfully!');
             signupForm.reset();
             loginForm.classList.remove('hidden');
             signupForm.classList.add('hidden');
         })
         .catch((error) => {
-            console(error.message);
+            console.log(error.message);
         });
 });
 
@@ -77,7 +78,7 @@ loginForm.addEventListener('submit', (e) => {
             loadNotes();
         })
         .catch((error) => {
-            console(error.message);
+            console.log(error.message);
         });
 });
 
@@ -97,7 +98,7 @@ logoutBtn.addEventListener('click', () => {
 saveNoteBtn.addEventListener('click', () => {
     const noteContent = noteInput.value.trim();
     if (!noteContent) {
-        console('Please write something in your note');
+        console.log('Please write something in your note');
         return;
     }
 
@@ -146,7 +147,11 @@ function loadNotes() {
             });
         })
         .catch((error) => {
-            console.error('Error loading notes:', error);
+            if (error.code === 'failed-precondition') {
+                console.error('Error loading notes: The query requires an index. You can create it here:', error.message);
+            } else {
+                console.error('Error loading notes:', error);
+            }
         });
 }
 
@@ -157,7 +162,7 @@ function copyNote(noteId) {
             const noteContent = doc.data().content;
             navigator.clipboard.writeText(noteContent)
                 .then(() => {
-                    console('Note copied to clipboard!');
+                    console.log('Note copied to clipboard!');
                 })
                 .catch((error) => {
                     console.error('Copy error:', error);
